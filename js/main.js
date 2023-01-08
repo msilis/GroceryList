@@ -1,22 +1,22 @@
-//Grocery Item List
+//Grocery Item - Initial List
 let groceryItemList = ['Milk', 'Cheese', 'Butter', 'Carrots', 'Broccoli'];
 
-//Commonly used variables
+//Element Variables
 let groceryInput = document.getElementById('input');
 let addButton = document.getElementById('addBtn');
-
-
+let chooseDeleteItem = document.getElementById('itemList');
+let itemToCheckOff = document.getElementById('itemList');
 
 
 //Make grocery list
 const addGroceryItem = () => {
-    let listContents = groceryItemList.map(groceryItem => `<li>${groceryItem}<span class="close" onclick="deleteItem()">\u00D7</span></li>`).join('\n');
+    let listContents = groceryItemList.map(groceryItem => `<li>${groceryItem}<span class="close">\u00D7</span></li>`).join('\n');
     document.getElementById('itemList').innerHTML = listContents;
     console.log(groceryItemList)
     
 }
 
-
+//Call addGroceryItem function so it displays in DOM
 addGroceryItem()
 
 //Add item to grocery list
@@ -42,39 +42,28 @@ groceryInput.addEventListener('keyup', (e) => {
 
 //Delete item from grocery list
 
-/* const deleteItem = () => {
-    let itemToDeleteSelect = document.querySelectorAll('.close');
-    
-    itemToDeleteSelect.forEach(e => {
-        let selectedItem = e.previousSibling.textContent;
-        e.addEventListener('click', ()=> {
-            console.log('clicked')
-            e.parentElement.style.display = 'none';
-            console.log(selectedItem)
-            let selectedIndex = groceryItemList.indexOf(selectedItem);
-            groceryItemList.splice(selectedIndex,1);
-            console.log(groceryItemList)
-        })
-    })
-} */
-const deleteItem = () => {
-    let deletedItem = document.getElementById('itemList');
+//Event listener for the delete button
+chooseDeleteItem.addEventListener('click', handleDelete);
 
-    deletedItem.addEventListener('click', (event)=>{
-        if (event.target.tagName.toLowerCase() === 'span'){
-            event.target.parentElement.style.display = 'none';
-            let selectedItem = event.target.previousSibling.textContent
-            console.log(selectedItem)
-            let selectedItemIndex = groceryItemList.indexOf(selectedItem);
-            groceryItemList.splice(selectedItemIndex, 1)
-            console.log(groceryItemList)
-        }
-})
+//Delete item function
+function handleDelete(event) {
+
+    if (event.target.tagName.toLowerCase()=== 'span'){
+        event.target.parentElement.style.display = 'none';
+        let selectedItem = event.target.previousSibling.textContent;
+        let selectedIndex = groceryItemList.indexOf(selectedItem)
+        groceryItemList.splice(selectedIndex, 1);
+        console.log(groceryItemList);
+    }
 }
 
 //Check item off grocery list
 
-document.getElementById('itemList').addEventListener('click', (event)=> {
+//Check event listener
+itemToCheckOff.addEventListener('click', handleCheckOff);
+
+//Check item function
+function handleCheckOff(event){
     if (event.target.tagName.toLowerCase() === 'li'){
         if(event.target.className === 'checked'){
             event.target.className = 'not-checked'
@@ -82,7 +71,8 @@ document.getElementById('itemList').addEventListener('click', (event)=> {
             event.target.className = 'checked'
         }
     }
-});
+}
+
 
 
 
