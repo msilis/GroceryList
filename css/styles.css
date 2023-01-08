@@ -1,0 +1,33 @@
+#itemList {
+    color: black;
+}
+
+.bought-item {
+    color: red;
+}
+
+#addBtn {
+    border: solid 1px black;
+    padding: 2px;
+    background-color: aliceblue;
+}
+
+#addBtn:hover {
+    cursor: pointer;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.not-checked {
+    text-decoration: none;
+}
+
+li:hover {
+    cursor: default;
+}
